@@ -12,9 +12,11 @@ TASKSET="taskset -c 0"
 CONSTRAIN_MEM="systemd-run --user --scope -p MemoryMax=512M -p MemorySwapMax=0"
 
 # Terminal definitions
-NAMES=(zt st xterm alacritty ghostty)
+NAMES=(zt foot kitty st xterm alacritty ghostty)
 declare -A BIN
 BIN[zt]="$ZT"
+BIN[foot]="/usr/bin/foot"
+BIN[kitty]="/usr/bin/kitty"
 BIN[st]="/usr/local/bin/st"
 BIN[xterm]="/usr/bin/xterm"
 BIN[alacritty]="/usr/bin/alacritty"
@@ -24,9 +26,9 @@ BIN[ghostty]="/usr/bin/ghostty"
 unset WAYLAND_DISPLAY
 unset XDG_SESSION_TYPE
 export GDK_BACKEND=x11
-export DISPLAY=:96
-if ! xdpyinfo -display :96 >/dev/null 2>&1; then
-    Xvfb :96 -screen 0 1024x768x24 +extension MIT-SHM &>/dev/null &
+export DISPLAY="${BENCH_DISPLAY:-:96}"
+if [ "$DISPLAY" != ":0" ] && ! xdpyinfo -display "$DISPLAY" >/dev/null 2>&1; then
+    Xvfb "$DISPLAY" -screen 0 1024x768x24 +extension MIT-SHM &>/dev/null &
     XVFB_PID=$!
     sleep 1
     trap "kill $XVFB_PID 2>/dev/null" EXIT
