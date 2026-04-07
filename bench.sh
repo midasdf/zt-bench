@@ -118,6 +118,8 @@ echo ""
 
 hyperfine --warmup 5 --min-runs 30 -i --export-json "$OUTDIR/startup.json" \
     --command-name zt        "$TASKSET ${BIN[zt]} -e true 2>/dev/null" \
+    --command-name foot      "$TASKSET ${BIN[foot]} -e true 2>/dev/null" \
+    --command-name kitty     "$TASKSET ${BIN[kitty]} -e true 2>/dev/null" \
     --command-name st        "$TASKSET ${BIN[st]} -e true 2>/dev/null" \
     --command-name xterm     "$TASKSET ${BIN[xterm]} -e true 2>/dev/null" \
     --command-name alacritty "$TASKSET ${BIN[alacritty]} -e true 2>/dev/null" \
