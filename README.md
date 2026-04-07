@@ -13,27 +13,65 @@ Benchmark scripts and results for [zt](https://github.com/midasdf/zt), a minimal
 
 Measures startup time (hyperfine, 30 runs), throughput (4.7MB dense ASCII), and peak RSS. All tests pinned to 1 CPU core. Includes constrained mode (512MB RAM limit) to simulate RPi Zero 2W.
 
-### Latest results (Intel i5-12450H, 1 core, Xvfb)
+### Latest results (Intel i5-12450H, 1 core, X11 :0)
 
 #### Startup time (30 runs)
 
 | Terminal | Mean | vs zt |
 |----------|------|-------|
-| **zt** | **30ms** | 1.0x |
-| xterm | 41ms | 1.4x |
-| st | 57ms | 1.9x |
-| alacritty | 110ms | 3.7x |
-| ghostty | 908ms | 30x |
+| **zt** | **5.5ms** | 1.0x |
+| xterm | 22ms | 3.9x |
+| st | 44ms | 8.0x |
+| alacritty | 119ms | 22x |
+| ghostty | 379ms | 69x |
 
 #### Throughput: 4.7MB dense ASCII (5 runs)
 
 | Terminal | Time | MB/s | Peak RSS |
 |----------|------|------|----------|
-| **zt** | **0.008s** | **568** | **5.7 MB** |
-| st | 0.162s | 28 | 24 MB |
-| xterm | 0.188s | 24 | 14 MB |
-| alacritty | 0.256s | 18 | 180 MB |
-| ghostty | 0.992s | 4.6 | 307 MB |
+| **zt** | **52ms** | **88** | **5.7 MB** |
+| foot | 116ms | 40 | 26 MB |
+| st | 160ms | 29 | 25 MB |
+| xterm | 180ms | 26 | 13 MB |
+| alacritty | 222ms | 21 | 131 MB |
+| kitty | 306ms | 15 | 146 MB |
+| ghostty | 598ms | 8 | 229 MB |
+
+#### Throughput: 2.9MB TrueColor (5 runs)
+
+| Terminal | Time | MB/s | vs zt |
+|----------|------|------|-------|
+| **zt** | **53ms** | **55** | 1.0x |
+| foot | 107ms | 27 | 2.0x |
+| xterm | 129ms | 23 | 2.4x |
+| st | 130ms | 22 | 2.4x |
+| alacritty | 196ms | 15 | 3.7x |
+| kitty | 280ms | 10 | 5.3x |
+| ghostty | 534ms | 5 | 10.1x |
+
+#### Throughput: 3.0MB Unicode/CJK (5 runs)
+
+| Terminal | Time | MB/s | vs zt |
+|----------|------|------|-------|
+| **zt** | **58ms** | **52** | 1.0x |
+| foot | 126ms | 24 | 2.2x |
+| st | 126ms | 24 | 2.2x |
+| xterm | 142ms | 21 | 2.5x |
+| alacritty | 200ms | 15 | 3.4x |
+| kitty | 292ms | 10 | 5.0x |
+| ghostty | 480ms | 6 | 8.3x |
+
+#### Idle memory (PSS)
+
+| Terminal | RSS | PSS | vs zt |
+|----------|-----|-----|-------|
+| **zt** | **5.0 MB** | **2.3 MB** | 1.0x |
+| xterm | 11 MB | 4.3 MB | 1.8x |
+| foot | 24 MB | 10 MB | 4.2x |
+| st | 25 MB | 13 MB | 5.3x |
+| alacritty | 107 MB | 33 MB | 14x |
+| kitty | 135 MB | 51 MB | 22x |
+| ghostty | 215 MB | 87 MB | 38x |
 
 ## Integration tests
 
