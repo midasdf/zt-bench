@@ -87,3 +87,6 @@ Measures startup time (hyperfine, 30 runs), throughput (4.7MB dense ASCII), and 
 ## License
 
 MIT
+
+## Disclaimer
+This project uses AI-generated code (LLM). I do my best to review and test it, but I can't guarantee it's perfect. Please use it at your own risk.\n
